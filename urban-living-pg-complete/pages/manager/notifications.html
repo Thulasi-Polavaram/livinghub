@@ -1,0 +1,29 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Resident communication dashboard."><meta name="robots" content="index,follow"><title>Manager Communications | Urban Living PG</title>
+<link rel="stylesheet" href="../../assets/css/styles.css"><script src="../../assets/js/app.js" defer></script></head><body>
+<a class="skip" href="#main-content">Skip to main content</a>
+<div class="demo-bar"><div class="container"><strong>UI Demo Mode:</strong> authentication and payments are bypassed so every screen is reachable. <a href="../../pages/auth/login.html">Production readiness notes</a></div></div>
+<header class="header"><div class="container header-row">
+<a class="brand" href="../../index.html" aria-label="Urban Living PG home"><img src="../../assets/img/urban-living-pg-logo.png" alt=""><span><strong>Urban Living PG</strong><small>Homes made simpler</small></span></a>
+<nav class="nav" aria-label="Main navigation" id="main-navigation"><a href="../../index.html" >Home</a><a href="../../pages/public/properties.html" >Find a Home</a><a href="../../pages/public/pg.html" >PG / Co-living</a><a href="../../pages/public/about.html" >How It Works</a><a href="../../pages/public/contact.html" >Support</a></nav>
+<div class="header-actions"><a class="btn btn-secondary" href="../../pages/auth/login.html">Sign in</a><a class="btn btn-primary" href="../../pages/auth/signup.html">Get started</a></div>
+<button class="menu" type="button" aria-expanded="false" aria-controls="main-navigation" aria-label="Open navigation menu"><span></span><span></span><span></span></button>
+</div></header><main id="main-content"><section class="page-head"><div class="container"><p class="eyebrow">MANAGER</p><h1>Resident communications</h1><p>Create service notifications and track which channel was requested, delivered or failed.</p></div></section>
+<section class="section" style="padding-top:10px"><div class="container grid-2">
+<div class="card"><h2>Send a message</h2><form data-demo-form data-success="Message queued in demo mode. Production must send through an approved provider, record delivery status and respect user consent/preferences.">
+<div class="field"><label for="recipient">Recipient</label><select id="recipient"><option>Demo Tenant — Koramangala 402</option><option>All residents — Koramangala</option><option>Residents with rent due</option></select></div>
+<div class="field" style="margin-top:12px"><label for="channel">Channel</label><select id="channel"><option>WhatsApp</option><option>SMS</option><option>Email</option><option>In-app notification</option></select></div>
+<div class="field" style="margin-top:12px"><label for="template">Approved template</label><select id="template"><option>Rent due reminder</option><option>Maintenance appointment</option><option>Power/water service notice</option><option>Booking update</option><option>General service update</option></select></div>
+<div class="field" style="margin-top:12px"><label for="msg">Message</label><textarea id="msg" required>Urban Living PG service update: your scheduled maintenance appointment is confirmed.</textarea></div>
+<div class="actions"><button class="btn btn-primary">Queue message</button></div><div data-form-message style="margin-top:12px"></div></form></div>
+<div class="card"><h2>Delivery history</h2><div class="notification-item"><span class="channel-pill">WhatsApp</span><div><strong>Maintenance appointment</strong><div class="muted">Demo Tenant · 10 Sep · 2:15 PM</div></div><span class="badge success">Delivered</span></div>
+<div class="notification-item"><span class="channel-pill">In-app</span><div><strong>Booking confirmed</strong><div class="muted">Demo Tenant · 10 Sep · 1:30 PM</div></div><span class="badge success">Read</span></div>
+<div class="notification-item"><span class="channel-pill">SMS</span><div><strong>Rent reminder</strong><div class="muted">Demo Resident 2 · 10 Sep · 9:00 AM</div></div><span class="badge warn">Queued</span></div>
+<div class="notice info" style="margin-top:16px"><strong>Production note:</strong> keep message history, template ID, recipient, consent basis, provider message ID, timestamps, delivery/read status and failure reason. Do not store unnecessary message content indefinitely.</div></div>
+</div></section>
+</main><footer class="footer"><div class="container footer-grid">
+<div><strong>Urban Living PG</strong><p>Apartment rentals, PG rooms and managed stays in one connected living journey.</p><small>Prototype UI — production services must be connected before launch.</small></div>
+<div><strong>Explore</strong><ul><li><a href="../../pages/public/properties.html">Apartments</a></li><li><a href="../../pages/public/pg.html">PG / Co-living</a></li><li><a href="../../pages/public/about.html">How it works</a></li><li><a href="../../pages/public/contact.html">Support</a></li></ul></div>
+<div><strong>Tenant</strong><ul><li><a href="../../pages/tenant/dashboard.html">Dashboard</a></li><li><a href="../../pages/tenant/bookings.html">Bookings</a></li><li><a href="../../pages/tenant/payments.html">Payments</a></li><li><a href="../../pages/tenant/maintenance.html">Maintenance</a></li></ul></div>
+<div><strong>Legal</strong><ul><li><a href="../../pages/public/privacy.html">Privacy</a></li><li><a href="../../pages/public/terms.html">Terms</a></li><li><a href="../../pages/auth/signup-privacy.html">Registration privacy</a></li><li><a href="../../pages/auth/signup-terms.html">Registration terms</a></li></ul></div>
+</div><div class="container" style="margin-top:28px"><small>© 2026 Urban Living PG. UI foundation.</small></div></footer></body></html>

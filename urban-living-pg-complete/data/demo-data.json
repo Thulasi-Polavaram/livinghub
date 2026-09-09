@@ -1,0 +1,30 @@
+{
+  "propertyTypes": [
+    "Apartment",
+    "PG / Private room",
+    "PG / Shared room",
+    "Co-living",
+    "Managed apartment"
+  ],
+  "pgRoomTypes": [
+    "Private / single",
+    "2 sharing",
+    "3 sharing",
+    "4 sharing"
+  ],
+  "roles": [
+    "Tenant",
+    "Owner / Manager",
+    "Maintenance Staff",
+    "Admin"
+  ],
+  "statuses": [
+    "Draft",
+    "Pending verification",
+    "Published",
+    "Reserved",
+    "Occupied",
+    "Maintenance",
+    "Archived"
+  ]
+}
