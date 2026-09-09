@@ -9,10 +9,10 @@
  * - Never put real passwords, OTPs, access tokens or secrets in localStorage.
  */
 const DEMO_ACCOUNTS = {
-  "tenant@urbanlivingpg.demo": { role:"tenant", password:"Tenant@123", target:"pages/tenant/dashboard.html", name:"Demo Tenant" },
-  "manager@urbanlivingpg.demo": { role:"manager", password:"Manager@123", target:"pages/manager/dashboard.html", name:"Demo Manager" },
-  "staff@urbanlivingpg.demo": { role:"staff", password:"Staff@123", target:"pages/staff/dashboard.html", name:"Maintenance Staff" },
-  "admin@urbanlivingpg.demo": { role:"admin", password:"Admin@123", target:"pages/admin/dashboard.html", name:"Platform Admin" }
+  "tenant@urbanlivingpg.demo": { role:"tenant", password:"Tenant@123", target:"../../pages/tenant/dashboard.html", name:"Demo Tenant" },
+  "manager@urbanlivingpg.demo": { role:"manager", password:"Manager@123", target:"../../pages/manager/dashboard.html", name:"Demo Manager" },
+  "staff@urbanlivingpg.demo": { role:"staff", password:"Staff@123", target:"../../pages/staff/dashboard.html", name:"Maintenance Staff" },
+  "admin@urbanlivingpg.demo": { role:"admin", password:"Admin@123", target:"../../pages/admin/dashboard.html", name:"Platform Admin" }
 };
 
 const $ = (s, r=document) => r.querySelector(s);
@@ -88,11 +88,11 @@ function demoSession(account){
 
 function getDashboard(role){
   return ({
-    tenant:"pages/tenant/dashboard.html",
-    manager:"pages/manager/dashboard.html",
-    staff:"pages/staff/dashboard.html",
-    admin:"pages/admin/dashboard.html"
-  })[role] || "pages/tenant/dashboard.html";
+    tenant:"../../pages/tenant/dashboard.html",
+    manager:"../../pages/manager/dashboard.html",
+    staff:"../../pages/staff/dashboard.html",
+    admin:"../../pages/admin/dashboard.html"
+  })[role] || "../../pages/tenant/dashboard.html";
 }
 
 $$("[data-demo-login]").forEach(b=>b.addEventListener("click",()=>{
