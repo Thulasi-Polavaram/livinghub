@@ -117,3 +117,4 @@ Future Android/iOS apps should consume the same backend APIs and business rules.
 - shared payment/order state
 - responsive web frontend
 - future native/cross-platform mobile client
+\n\n## Change tracking\nEvery project update is recorded in `CHANGELOG.md` with the date, files/areas changed, purpose, and verification notes.\n

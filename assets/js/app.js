@@ -71,6 +71,36 @@ function initIndiaClock(){
 
 initIndiaClock();
 
+
+/* Responsive role-aware application shell. */
+const APP_ROLE = document.body.dataset.appRole || "";
+const ROLE_NAMES = {tenant:"Tenant", manager:"Manager", owner:"Property Owner", staff:"Staff", admin:"Admin"};
+const ROLE_NAV = {
+  tenant:[["Dashboard","../../pages/tenant/dashboard.html"],["Bookings","../../pages/tenant/bookings.html"],["Payments","../../pages/tenant/payments.html"],["Maintenance","../../pages/tenant/maintenance.html"],["Requests","../../pages/tenant/requests.html"],["Notifications","../../pages/tenant/notifications.html"],["Profile","../../pages/tenant/profile.html"]],
+  manager:[["Dashboard","../../pages/manager/dashboard.html"],["Rentals","../../pages/owner/properties.html"],["Maintenance","../../pages/owner/maintenance.html"],["Payments","../../pages/owner/payments.html"],["Tenants","../../pages/owner/tenants.html"],["Bookings","../../pages/owner/bookings.html"],["Communications","../../pages/manager/notifications.html"]],
+  owner:[["Dashboard","../../pages/owner/dashboard.html"],["Properties","../../pages/owner/properties.html"],["Rooms","../../pages/owner/rooms.html"],["Tenants","../../pages/owner/tenants.html"],["Bookings","../../pages/owner/bookings.html"],["Payments","../../pages/owner/payments.html"],["Maintenance","../../pages/owner/maintenance.html"]],
+  staff:[["Dashboard","../../pages/staff/dashboard.html"],["Work orders","../../pages/staff/work-orders.html"],["Support","../../pages/public/contact.html"]],
+  admin:[["Dashboard","../../pages/admin/dashboard.html"],["Verification","../../pages/admin/verification.html"],["Users","../../pages/admin/users.html"],["Disputes","../../pages/admin/disputes.html"],["Audit","../../pages/admin/audit.html"]]
+};
+function initApplicationShell(){
+  const nav=$(".nav"), actions=$(".header-actions");
+  if(!nav || !actions) return;
+  if(APP_ROLE && ROLE_NAV[APP_ROLE]){
+    nav.setAttribute("aria-label", `${ROLE_NAMES[APP_ROLE]} application navigation`);
+    nav.innerHTML=ROLE_NAV[APP_ROLE].map(([label,href])=>`<a href="${href}">${label}</a>`).join("");
+    actions.innerHTML=`<span class="header-role" aria-label="Signed in role">${ROLE_NAMES[APP_ROLE]}</span><a class="btn btn-secondary" href="../../pages/auth/login.html" data-logout>Sign out</a>`;
+  }
+  let mobileActions=nav.querySelector(".mobile-nav-actions");
+  if(!mobileActions){
+    mobileActions=document.createElement("div"); mobileActions.className="mobile-nav-actions";
+    mobileActions.setAttribute("role","group"); mobileActions.setAttribute("aria-label",APP_ROLE?"Account actions":"Account");
+    nav.appendChild(mobileActions);
+  }
+  mobileActions.innerHTML="";
+  [...actions.children].forEach(node=>mobileActions.appendChild(node.cloneNode(true)));
+}
+initApplicationShell();
+
 const navToggle = $(".menu");
 const nav = $(".nav");
 if(navToggle && nav){
@@ -92,7 +122,7 @@ function getDashboard(role){
     manager:"../../pages/manager/dashboard.html",
     staff:"../../pages/staff/dashboard.html",
     admin:"../../pages/admin/dashboard.html"
-  })[role] || "pages/tenant/dashboard.html";
+  })[role] || "../../pages/tenant/dashboard.html";
 }
 
 $$("[data-demo-login]").forEach(b=>b.addEventListener("click",()=>{
@@ -164,8 +194,11 @@ $$("[data-tabs]").forEach(group=>{
   }));
 });
 
-$$("[data-logout]").forEach(b=>b.addEventListener("click",()=>{
+document.addEventListener("click",(event)=>{
+  const logout=event.target.closest("[data-logout]");
+  if(!logout) return;
+  event.preventDefault();
   localStorage.removeItem("ulp_demo_role");
   localStorage.removeItem("ulp_demo_user");
   location.href="../../pages/auth/login.html";
-}));
+});

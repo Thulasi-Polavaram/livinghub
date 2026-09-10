@@ -65,3 +65,19 @@ input,select,textarea{width:100%;min-height:46px;border:1px solid #bfcfc8;backgr
   .mobile-bottom-nav{display:flex;position:sticky;bottom:0;z-index:40;background:#fff;border-top:1px solid var(--line);padding:7px;gap:4px;justify-content:space-around}
   .mobile-bottom-nav a{font-size:.75rem;text-decoration:none;text-align:center;padding:7px 5px;border-radius:8px}
 }
+
+
+/* Authenticated shell and mobile-accessible account actions */
+.header-role{display:inline-flex;align-items:center;min-height:44px;padding:8px 10px;border-radius:10px;background:var(--brand-soft);color:var(--brand-dark);font-weight:850;white-space:nowrap}
+.mobile-nav-actions{display:none;border-top:1px solid var(--line);margin-top:8px;padding-top:8px;gap:8px;flex-wrap:wrap}
+.mobile-nav-actions .btn{flex:1 1 140px}
+@media(max-width:980px){
+  .nav.open .mobile-nav-actions{display:flex}
+  .nav a,.mobile-nav-actions .btn{min-height:44px}
+  .nav a{display:flex;align-items:center;padding:10px 12px;border-radius:8px}
+  .app-shell .header-role{display:none}
+}
+@media(max-width:640px){
+  .menu{min-width:44px;min-height:44px;display:grid;place-content:center}
+  .mobile-nav-actions{width:100%}
+}
