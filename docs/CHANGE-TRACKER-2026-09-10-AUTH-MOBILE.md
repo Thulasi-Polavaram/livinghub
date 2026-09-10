@@ -27,10 +27,10 @@
 ### Demo identifiers
 | Role | Email | Mobile | Password |
 |---|---|---|---|
-| Tenant | tenant@urbanlivingpg.demo | +91 90000 00001 | Tenant@123 |
-| Manager | manager@urbanlivingpg.demo | +91 90000 00002 | Manager@123 |
-| Staff | staff@urbanlivingpg.demo | +91 90000 00003 | Staff@123 |
-| Admin | admin@urbanlivingpg.demo | +91 90000 00004 | Admin@123 |
+| Tenant | tenant@urbanlivingpg.demo | 90000 00001 | Tenant@123 |
+| Manager | manager@urbanlivingpg.demo | 90000 00002 | Manager@123 |
+| Staff | staff@urbanlivingpg.demo | 90000 00003 | Staff@123 |
+| Admin | admin@urbanlivingpg.demo | 90000 00004 | Admin@123 |
 
 - Removed the empty header action container from authentication/recovery pages after suppressing duplicate account CTAs.
 

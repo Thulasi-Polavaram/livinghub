@@ -47,3 +47,10 @@
 ### Verification
 - 50 HTML pages retained.
 - Local HTML/CSS/JS/image references rechecked after the change.
+
+## 2026-09-10 — India-first mobile number UX normalization
+- Removed visible `+91` from mobile-number entry and demo credential displays.
+- Standardized user-facing guidance around a 10-digit Indian mobile number.
+- Retained canonical international-format values internally for demo matching and future WhatsApp/SMS integration.
+- Reviewed mobile fields across public, authentication and tenant-profile pages for semantic labels, `tel` input, `inputmode` and autocomplete behavior.
+- Added `docs/CHANGE-TRACKER-2026-09-10-MOBILE-FORMAT.md`.

@@ -86,10 +86,10 @@ The previous Apply4Company project already established several useful engineerin
 
 ## Role-based application views
 The UI now demonstrates credential-driven role routing:
-- Tenant: `tenant@urbanlivingpg.demo` or `+91 90000 00001` → Tenant Dashboard
-- Manager: `manager@urbanlivingpg.demo` or `+91 90000 00002` → Manager / Rentals & Maintenance Dashboard
-- Staff: `staff@urbanlivingpg.demo` or `+91 90000 00003` → Maintenance Staff Dashboard
-- Admin: `admin@urbanlivingpg.demo` or `+91 90000 00004` → Admin Dashboard
+- Tenant: `tenant@urbanlivingpg.demo` or `90000 00001` → Tenant Dashboard
+- Manager: `manager@urbanlivingpg.demo` or `90000 00002` → Manager / Rentals & Maintenance Dashboard
+- Staff: `staff@urbanlivingpg.demo` or `90000 00003` → Maintenance Staff Dashboard
+- Admin: `admin@urbanlivingpg.demo` or `90000 00004` → Admin Dashboard
 
 These credentials are prototypes only. Production must authenticate on the server and return role/permission claims that the backend enforces.
 
@@ -123,4 +123,4 @@ Future Android/iOS apps should consume the same backend APIs and business rules.
 
 ## Authentication identifier policy
 
-The UI supports both verified email address and verified mobile number as account identifiers. Registration collects both. Sign-in and account recovery accept either identifier. Production must normalize identifiers server-side, verify ownership before activation or recovery, apply rate limits/lockouts, avoid account-enumeration responses, and keep authentication secrets out of browser storage.
+The UI supports both verified email address and verified mobile number as account identifiers. Registration collects both. Sign-in and account recovery accept either identifier. For India-first UX, users enter a simple 10-digit mobile number without needing to understand `+91`; production should normalize it server-side to a canonical international representation for SMS/WhatsApp/provider integrations, verify ownership before activation or recovery, apply rate limits/lockouts, avoid account-enumeration responses, and keep authentication secrets out of browser storage.
