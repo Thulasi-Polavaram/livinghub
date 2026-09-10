@@ -1,3 +1,7 @@
+
+## 2026-09-10 — Mobile login normalization fix
+- Fixed demo authentication to accept both 10-digit Indian mobile numbers and `+91` international-format numbers.
+- Kept the customer-facing mobile-number UX free of a visible country code.
 # Urban Living PG — Change Log
 
 ## 2026-09-10 — India clock, mobile CTAs and functional inventory filters

@@ -13,7 +13,17 @@ const DEMO_ACCOUNTS = {
 };
 
 function normalizeIdentifier(value){
-  return String(value || "").trim().toLowerCase().replace(/[()\s-]/g, "");
+  const raw = String(value || "").trim().toLowerCase();
+  if(!raw) return "";
+
+  // Email identifiers remain case-insensitive. Mobile identifiers are
+  // canonicalized so the UI can accept either 9000000001 or +919000000001.
+  if(raw.includes("@")) return raw.replace(/\s+/g, "");
+
+  const digits = raw.replace(/\D/g, "");
+  if(digits.length === 10) return `+91${digits}`;
+  if(digits.length === 12 && digits.startsWith("91")) return `+${digits}`;
+  return raw.replace(/[()\s-]/g, "");
 }
 function findDemoAccount(identifier){
   const normalized = normalizeIdentifier(identifier);

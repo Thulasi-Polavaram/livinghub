@@ -40,3 +40,12 @@
 - No local-reference regressions introduced.
 - No visible `+91` country-code text remains in HTML UI content; documentation may mention the canonical format for engineering purposes.
 - Internal demo account matching retains canonical `+91` values.
+
+
+## Follow-up fix: mobile login normalization
+
+- Fixed demo login so both `9000000001` and `+919000000001` resolve to the same canonical demo mobile identifier.
+- Email identifiers remain case-insensitive and are not treated as phone numbers.
+- Mobile input accepts formatting characters and canonicalizes India numbers for demo matching.
+- The UI continues to request/display the customer-friendly 10-digit format; the canonical `+91` representation remains an internal integration value for production SMS/WhatsApp providers.
+- Production authentication must perform authoritative phone normalization and verification server-side.
