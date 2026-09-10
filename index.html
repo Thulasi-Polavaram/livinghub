@@ -2,7 +2,6 @@
 <meta name="description" content="Find apartments, PG rooms and managed stays with one connected tenant experience."><meta name="robots" content="index,follow"><title>Home | Urban Living PG</title>
 <link rel="stylesheet" href="assets/css/styles.css"><script src="assets/js/app.js" defer></script></head><body>
 <a class="skip" href="#main-content">Skip to main content</a>
-</div>
 <header class="header"><div class="container header-row">
 <a class="brand" href="index.html" aria-label="Urban Living PG home"><img src="assets/img/urban-living-pg-logo.png" alt=""><span><strong>Urban Living PG</strong><small>Homes made simpler</small></span></a>
 <nav class="nav" aria-label="Main navigation" id="main-navigation"><a href="index.html" aria-current="page">Home</a><a href="pages/public/properties.html" >Find a Home</a><a href="pages/public/pg.html" >PG / Co-living</a><a href="pages/public/about.html" >How It Works</a><a href="pages/public/contact.html" >Support</a></nav>
@@ -12,10 +11,10 @@
 <section class="hero"><div class="container hero-grid"><div>
 <p class="eyebrow">APARTMENTS + PG + CO-LIVING</p><h1>Find a place that fits your <span style="color:var(--brand)">life.</span></h1>
 <p class="lead">Urban Living PG brings apartments, private PG rooms, shared rooms and managed stays into one simple journey — search, visit, reserve, pay, live and get support.</p>
-<form class="grid-2" action="pages/public/properties.html" style="margin-top:25px">
+<form class="grid-2" action="pages/public/properties.html" method="get" data-home-search style="margin-top:25px">
 <div class="field"><label for="where">Where do you want to live?</label><input id="where" name="where" placeholder="City, area or landmark"></div>
-<div class="field"><label for="kind">What are you looking for?</label><select id="kind" name="kind"><option>Any home</option><option>Apartment</option><option>PG / Private room</option><option>PG / Shared room</option><option>Co-living</option></select></div>
-<div class="field"><label for="rent">Monthly budget</label><select id="rent"><option>Any budget</option><option>Under ₹10,000</option><option>₹10,000–₹20,000</option><option>₹20,000–₹30,000</option><option>₹30,000+</option></select></div>
+<div class="field"><label for="kind">What are you looking for?</label><select id="kind" name="kind"><option value="any">Any home</option><option value="apartment">Apartment</option><option value="pg-private">PG / Private room</option><option value="pg-shared">PG / Shared room</option><option value="coliving">Co-living</option></select></div>
+<div class="field"><label for="rent">Monthly budget</label><select id="rent" name="budget"><option value="any">Any budget</option><option value="under10">Under ₹10,000</option><option value="10to20">₹10,000–₹20,000</option><option value="20to30">₹20,000–₹30,000</option><option value="over30">₹30,000+</option></select></div>
 <button class="btn btn-primary" type="submit">Search homes</button>
 </form></div>
 <div class="hero-panel"><p class="eyebrow">ONE LIVING JOURNEY</p>

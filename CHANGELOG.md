@@ -1,5 +1,36 @@
 # Urban Living PG — Change Log
 
+## 2026-09-10 — India clock, mobile CTAs and functional inventory filters
+
+### Fixed
+- Changed the shared India date/time presentation to a two-line treatment: date above, bold application-brand time below; no timezone label is displayed.
+- Fixed mobile public-header CTAs so **Sign in** and **Get started** remain visible on small screens instead of being hidden behind the desktop-only header action rule.
+- Preserved a 44px minimum action target for primary header controls.
+- Removed a stray closing `</div>` found after the skip link in the shared HTML shell.
+- Added `noindex,nofollow` to authenticated application pages to prevent private/demo screens being indexed.
+
+### Search/filter functionality
+- Rebuilt apartment filters for search text, bedrooms, budget and furnishing.
+- Rebuilt PG filters for search text, room occupancy, meals, gender policy and budget.
+- Added working sort controls for apartment rent/newness and PG rent/distance.
+- Added result counts, live filter status and no-results messaging.
+- Added Clear filters actions that reset controls and return focus to the search field.
+- Added URL query-state so filtered results can be refreshed/shared without losing the selected filters.
+- Connected the home-page search form to the correct first-class Apartment or PG inventory based on the selected home type.
+
+### Accessibility / IT controls
+- Filter controls have explicit labels and stable IDs.
+- Dynamic result counts/status use `aria-live`/status semantics without moving focus unexpectedly.
+- Clear-filter actions are real buttons rather than navigation links.
+- Search/filter controls remain keyboard operable and touch-friendly.
+- Authenticated/private pages are marked `noindex,nofollow`.
+
+### Verification
+- 50 HTML pages retained.
+- Local references rechecked.
+- JavaScript syntax check passed.
+- Inventory filters and sorting reviewed for both apartment and PG result sets.
+
 ## 2026-09-10 — Responsive authenticated shell and WCAG navigation fix
 
 ### Fixed
