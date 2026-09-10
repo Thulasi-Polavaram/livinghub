@@ -69,3 +69,39 @@ The following 29 pages also changed their robots directive to `noindex,nofollow`
 - Mobile reflow is preserved.
 
 This is an implementation audit, not a formal WCAG conformance certification. Formal conformance still requires browser-based keyboard, screen-reader, zoom/reflow, contrast and automated accessibility testing.
+
+
+## Release: Authentication context + email/mobile identifiers
+
+### Files modified
+- `assets/js/app.js` — dual-identifier demo login, demo mobile numbers, auth-page shell handling.
+- `assets/css/styles.css` — public mobile CTA layout and authentication-page CTA suppression.
+- `pages/auth/login.html` — email-or-mobile sign-in and paired demo identifiers.
+- `pages/auth/signup.html` — explicit mobile + email account registration.
+- `pages/auth/forgot-password.html` — email-or-mobile account recovery.
+- `pages/auth/verify-otp.html` — recovery identifier wording.
+- `pages/auth/reset-password.html` — authentication-page shell.
+- `pages/auth/password-reset-success.html` — authentication-page shell.
+- `pages/auth/signup-privacy.html` — authentication-page shell.
+- `pages/auth/signup-terms.html` — authentication-page shell.
+- `pages/public/contact.html` — email + mobile support contact.
+- All role pages containing `mobile-bottom-nav` — corrected role-specific mobile links.
+- `README.md` — demo mobile identifiers and authentication identifier policy.
+- `CHANGELOG.md` — release notes.
+
+### Removed from authentication headers
+- Duplicate `Sign in` and `Get started` actions on all authentication/recovery pages.
+
+### Retained
+- `Sign in` and `Get started` on normal public discovery/conversion pages.
+- Payment pages and demo payment-safe behavior.
+- India date/time display without a timezone label.
+
+### Verification intent
+- Public pages: direct mobile account actions remain available.
+- Auth pages: no duplicate account CTAs in the header.
+- Login/recovery: email or mobile identifier accepted by the demo UI.
+- Role-specific mobile navigation: tenant/manager/owner/staff/admin links aligned to each role.
+- Production security controls remain backend responsibilities.
+
+- Removed the empty header action container from authentication/recovery pages after suppressing duplicate account CTAs.

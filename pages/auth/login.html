@@ -1,26 +1,25 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="description" content="Role-based demo sign-in."><meta name="robots" content="index,follow"><title>Sign In | Urban Living PG</title>
-<link rel="stylesheet" href="../../assets/css/styles.css"><script src="../../assets/js/app.js" defer></script></head><body>
+<meta name="description" content="Role-based demo sign-in."><meta name="robots" content="noindex,nofollow"><title>Sign In | Urban Living PG</title>
+<link rel="stylesheet" href="../../assets/css/styles.css"><script src="../../assets/js/app.js" defer></script></head><body class="auth-page">
 <a class="skip" href="#main-content">Skip to main content</a>
 <header class="header"><div class="container header-row">
 <a class="brand" href="../../index.html" aria-label="Urban Living PG home"><img src="../../assets/img/urban-living-pg-logo.png" alt=""><span><strong>Urban Living PG</strong><small>Homes made simpler</small></span></a>
 <nav class="nav" aria-label="Main navigation" id="main-navigation"><a href="../../index.html" >Home</a><a href="../../pages/public/properties.html" >Find a Home</a><a href="../../pages/public/pg.html" >PG / Co-living</a><a href="../../pages/public/about.html" >How It Works</a><a href="../../pages/public/contact.html" >Support</a></nav>
-<div class="header-actions"><a class="btn btn-secondary" href="../../pages/auth/login.html">Sign in</a><a class="btn btn-primary" href="../../pages/auth/signup.html">Get started</a></div>
 <button class="menu" type="button" aria-expanded="false" aria-controls="main-navigation" aria-label="Open navigation menu"><span></span><span></span><span></span></button>
 </div></header><main id="main-content">
 <section class="page-head"><div class="container"><p class="eyebrow">SECURE ACCESS</p><h1>Sign in to your workspace</h1><p>Your credentials determine which application view you see. Tenants see their stays and payments; managers see rentals and maintenance; staff see work orders; admins see platform controls.</p></div></section>
 <section class="section" style="padding-top:10px"><div class="container detail">
-<div class="card"><form data-login-form><div class="field"><label for="login-email">Email address</label><input id="login-email" type="email" autocomplete="username" required placeholder="you@example.com"></div>
+<div class="card"><form data-login-form><div class="field"><label for="login-identifier">Email or mobile number</label><input id="login-identifier" type="text" inputmode="text" autocomplete="username" required placeholder="Email address or +91 mobile number"><span class="help identifier-hint">Use either your registered email address or mobile number.</span></div>
 <div class="field" style="margin-top:12px"><label for="login-password">Password</label><input id="login-password" type="password" autocomplete="current-password" required></div>
 <div class="actions"><button class="btn btn-primary">Sign in</button><a class="btn btn-secondary" href="../../pages/auth/forgot-password.html">Forgot password?</a></div>
 <div data-login-message style="margin-top:12px"></div></form>
 <div class="notice warn" style="margin-top:18px"><strong>Prototype:</strong> these are demo credentials only. Production must use server-side authentication and authorization.</div></div>
 <aside class="card"><h2>Demo credentials</h2><p class="muted">Use these only to explore the different application views.</p>
 <div class="list">
-<div class="list-row"><div><strong>Tenant</strong><div class="muted">tenant@urbanlivingpg.demo</div></div><button class="btn btn-soft" data-demo-login="tenant@urbanlivingpg.demo">Enter</button></div>
-<div class="list-row"><div><strong>Manager</strong><div class="muted">manager@urbanlivingpg.demo</div></div><button class="btn btn-soft" data-demo-login="manager@urbanlivingpg.demo">Enter</button></div>
-<div class="list-row"><div><strong>Maintenance staff</strong><div class="muted">staff@urbanlivingpg.demo</div></div><button class="btn btn-soft" data-demo-login="staff@urbanlivingpg.demo">Enter</button></div>
-<div class="list-row"><div><strong>Admin</strong><div class="muted">admin@urbanlivingpg.demo</div></div><button class="btn btn-soft" data-demo-login="admin@urbanlivingpg.demo">Enter</button></div>
+<div class="list-row"><div><strong>Tenant</strong><div class="muted">tenant@urbanlivingpg.demo · +91 90000 00001</div></div><button class="btn btn-soft" data-demo-login="tenant@urbanlivingpg.demo">Enter</button></div>
+<div class="list-row"><div><strong>Manager</strong><div class="muted">manager@urbanlivingpg.demo · +91 90000 00002</div></div><button class="btn btn-soft" data-demo-login="manager@urbanlivingpg.demo">Enter</button></div>
+<div class="list-row"><div><strong>Maintenance staff</strong><div class="muted">staff@urbanlivingpg.demo · +91 90000 00003</div></div><button class="btn btn-soft" data-demo-login="staff@urbanlivingpg.demo">Enter</button></div>
+<div class="list-row"><div><strong>Admin</strong><div class="muted">admin@urbanlivingpg.demo · +91 90000 00004</div></div><button class="btn btn-soft" data-demo-login="admin@urbanlivingpg.demo">Enter</button></div>
 </div></aside></div></section>
 </main><footer class="footer"><div class="container footer-grid">
 <div><strong>Urban Living PG</strong><p>Apartment rentals, PG rooms and managed stays in one connected living journey.</p><small>Prototype UI — production services must be connected before launch.</small></div>

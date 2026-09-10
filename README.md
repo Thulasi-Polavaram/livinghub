@@ -41,6 +41,8 @@ urban-living-pg-complete/
 ```
 
 ## Demo access
+
+Demo sign-in accepts either the demo email address or its paired mobile number.
 Authentication is intentionally bypassed. The Login page provides direct entry as:
 - Tenant
 - Owner / Manager
@@ -84,10 +86,10 @@ The previous Apply4Company project already established several useful engineerin
 
 ## Role-based application views
 The UI now demonstrates credential-driven role routing:
-- `tenant@urbanlivingpg.demo` → Tenant Dashboard
-- `manager@urbanlivingpg.demo` → Manager / Rentals & Maintenance Dashboard
-- `staff@urbanlivingpg.demo` → Maintenance Staff Dashboard
-- `admin@urbanlivingpg.demo` → Admin Dashboard
+- Tenant: `tenant@urbanlivingpg.demo` or `+91 90000 00001` → Tenant Dashboard
+- Manager: `manager@urbanlivingpg.demo` or `+91 90000 00002` → Manager / Rentals & Maintenance Dashboard
+- Staff: `staff@urbanlivingpg.demo` or `+91 90000 00003` → Maintenance Staff Dashboard
+- Admin: `admin@urbanlivingpg.demo` or `+91 90000 00004` → Admin Dashboard
 
 These credentials are prototypes only. Production must authenticate on the server and return role/permission claims that the backend enforces.
 
@@ -118,3 +120,7 @@ Future Android/iOS apps should consume the same backend APIs and business rules.
 - responsive web frontend
 - future native/cross-platform mobile client
 \n\n## Change tracking\nEvery project update is recorded in `CHANGELOG.md` with the date, files/areas changed, purpose, and verification notes.\n
+
+## Authentication identifier policy
+
+The UI supports both verified email address and verified mobile number as account identifiers. Registration collects both. Sign-in and account recovery accept either identifier. Production must normalize identifiers server-side, verify ownership before activation or recovery, apply rate limits/lockouts, avoid account-enumeration responses, and keep authentication secrets out of browser storage.

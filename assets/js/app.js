@@ -6,11 +6,20 @@
  * authentication, authorization, sessions and persistence MUST be server-side.
  */
 const DEMO_ACCOUNTS = {
-  "tenant@urbanlivingpg.demo": { role:"tenant", password:"Tenant@123", name:"Demo Tenant" },
-  "manager@urbanlivingpg.demo": { role:"manager", password:"Manager@123", name:"Demo Manager" },
-  "staff@urbanlivingpg.demo": { role:"staff", password:"Staff@123", name:"Maintenance Staff" },
-  "admin@urbanlivingpg.demo": { role:"admin", password:"Admin@123", name:"Platform Admin" }
+  "tenant@urbanlivingpg.demo": { role:"tenant", password:"Tenant@123", name:"Demo Tenant", mobile:"+919000000001" },
+  "manager@urbanlivingpg.demo": { role:"manager", password:"Manager@123", name:"Demo Manager", mobile:"+919000000002" },
+  "staff@urbanlivingpg.demo": { role:"staff", password:"Staff@123", name:"Maintenance Staff", mobile:"+919000000003" },
+  "admin@urbanlivingpg.demo": { role:"admin", password:"Admin@123", name:"Platform Admin", mobile:"+919000000004" }
 };
+
+function normalizeIdentifier(value){
+  return String(value || "").trim().toLowerCase().replace(/[()\s-]/g, "");
+}
+function findDemoAccount(identifier){
+  const normalized = normalizeIdentifier(identifier);
+  if(DEMO_ACCOUNTS[normalized]) return DEMO_ACCOUNTS[normalized];
+  return Object.values(DEMO_ACCOUNTS).find(account => normalizeIdentifier(account.mobile) === normalized) || null;
+}
 
 const $ = (s, r=document) => r.querySelector(s);
 const $$ = (s, r=document) => [...r.querySelectorAll(s)];
@@ -73,6 +82,12 @@ function initApplicationShell(){
 }
 initApplicationShell();
 
+/* Authentication/recovery pages intentionally have no duplicate header CTAs. */
+if(document.body.classList.contains("auth-page")){
+  const accountActions = $(".header-actions");
+  if(accountActions) accountActions.setAttribute("aria-hidden", "true");
+}
+
 const navToggle = $(".menu");
 const nav = $(".nav");
 if(navToggle && nav){
@@ -100,12 +115,12 @@ const loginForm = $("[data-login-form]");
 if(loginForm){
   loginForm.addEventListener("submit", event=>{
     event.preventDefault();
-    const email = ($("#login-email")?.value || "").trim().toLowerCase();
+    const identifier = $("#login-identifier")?.value || "";
     const password = $("#login-password")?.value || "";
     const msg = $("[data-login-message]");
-    const account = DEMO_ACCOUNTS[email];
+    const account = findDemoAccount(identifier);
     if(!account || account.password !== password){
-      msg.textContent = "Demo credentials not recognized. Use one of the supplied demo accounts.";
+      msg.textContent = "Demo credentials not recognized. Use a demo email address or mobile number with its password.";
       msg.className = "notice danger"; msg.setAttribute("role","alert"); return;
     }
     demoSession(account);

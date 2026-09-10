@@ -18,6 +18,8 @@
 - Added URL query-state so filtered results can be refreshed/shared without losing the selected filters.
 - Connected the home-page search form to the correct first-class Apartment or PG inventory based on the selected home type.
 
+- Removed the empty header action container from authentication/recovery pages after suppressing duplicate account CTAs.
+
 ### Accessibility / IT controls
 - Filter controls have explicit labels and stable IDs.
 - Dynamic result counts/status use `aria-live`/status semantics without moving focus unexpectedly.
