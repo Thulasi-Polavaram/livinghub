@@ -36,10 +36,10 @@ const $$ = (s, r=document) => [...r.querySelectorAll(s)];
 const APP_ROLE = document.body.dataset.appRole || "";
 const ROLE_NAMES = {tenant:"Tenant", manager:"Manager", owner:"Property Owner", staff:"Staff", admin:"Admin"};
 const ROLE_NAV = {
-  tenant:[["Dashboard","../../pages/tenant/dashboard.html"],["Bookings","../../pages/tenant/bookings.html"],["Payments","../../pages/tenant/payments.html"],["Maintenance","../../pages/tenant/maintenance.html"],["Requests","../../pages/tenant/requests.html"],["Notifications","../../pages/tenant/notifications.html"],["Profile","../../pages/tenant/profile.html"]],
+  tenant:[["Dashboard","../../pages/tenant/dashboard.html"],["Bookings","../../pages/tenant/bookings.html"],["Payments","../../pages/tenant/payments.html"],["Maintenance","../../pages/tenant/maintenance.html"],["Requests","../../pages/tenant/requests.html"],["Verification","../../pages/tenant/verification.html"],["Notifications","../../pages/tenant/notifications.html"],["Profile","../../pages/tenant/profile.html"]],
   manager:[["Dashboard","../../pages/manager/dashboard.html"],["Rentals","../../pages/owner/properties.html"],["Maintenance","../../pages/owner/maintenance.html"],["Payments","../../pages/owner/payments.html"],["Tenants","../../pages/owner/tenants.html"],["Bookings","../../pages/owner/bookings.html"],["Communications","../../pages/manager/notifications.html"]],
-  owner:[["Dashboard","../../pages/owner/dashboard.html"],["Properties","../../pages/owner/properties.html"],["Rooms","../../pages/owner/rooms.html"],["Tenants","../../pages/owner/tenants.html"],["Bookings","../../pages/owner/bookings.html"],["Payments","../../pages/owner/payments.html"],["Maintenance","../../pages/owner/maintenance.html"]],
-  staff:[["Dashboard","../../pages/staff/dashboard.html"],["Work orders","../../pages/staff/work-orders.html"],["Support","../../pages/public/contact.html"]],
+  owner:[["Dashboard","../../pages/owner/dashboard.html"],["Properties","../../pages/owner/properties.html"],["Rooms","../../pages/owner/rooms.html"],["Tenants","../../pages/owner/tenants.html"],["Verification","../../pages/owner/tenant-verification.html"],["Bookings","../../pages/owner/bookings.html"],["Payments","../../pages/owner/payments.html"],["Maintenance","../../pages/owner/maintenance.html"]],
+  staff:[["Dashboard","../../pages/staff/dashboard.html"],["Work orders","../../pages/staff/work-orders.html"]],
   admin:[["Dashboard","../../pages/admin/dashboard.html"],["Verification","../../pages/admin/verification.html"],["Users","../../pages/admin/users.html"],["Disputes","../../pages/admin/disputes.html"],["Audit","../../pages/admin/audit.html"]]
 };
 
@@ -143,12 +143,54 @@ if(loginForm){
 /* Demo forms: accessible status only; no false claim of production persistence. */
 $$("[data-demo-form]").forEach(form=>form.addEventListener("submit",event=>{
   event.preventDefault();
+  if(form.hasAttribute("data-demo-signup")) return;
   const msg = $("[data-form-message]",form);
   if(msg){
     msg.textContent = form.dataset.success || "Demo action completed. Connect the production API for real persistence.";
     msg.className = "notice success"; msg.setAttribute("role","status");
   }
 }));
+
+/* Demo onboarding: signup leads to resident identity/occupancy verification.
+   Sensitive files are never persisted in browser storage; production must use
+   encrypted server-side storage, strict RBAC, retention rules and audit logs. */
+const signupForm = $("[data-demo-signup]");
+if(signupForm){
+  signupForm.addEventListener("submit", event=>{
+    event.preventDefault();
+    const msg = $("[data-form-message]",signupForm);
+    if(msg){
+      msg.innerHTML = 'Account created in demo mode. <a class="btn btn-soft" href="../../pages/tenant/verification.html">Continue to identity & occupancy verification</a>';
+      msg.className = "notice success"; msg.setAttribute("role","status");
+    }
+  });
+}
+
+function initVerificationDemo(){
+  const root = $("[data-verification-root]");
+  const pending = $("[data-verification-pending]");
+  const locked = $("[data-verification-locked]");
+  const status = $("[data-verification-status]");
+  const approveButtons = $$('[data-approve-verification]');
+  const approved = localStorage.getItem("ulp_demo_verification") === "approved";
+  if(root){
+    if(pending) pending.hidden = approved;
+    if(locked) locked.hidden = !approved;
+  }
+  approveButtons.forEach(button=>button.addEventListener("click",()=>{
+    localStorage.setItem("ulp_demo_verification","approved");
+    if(pending) pending.hidden=true;
+    if(locked) locked.hidden=false;
+    const target = $("#owner-review-status") || status;
+    if(target){
+      target.textContent="Demo approval completed. Verification is now marked verified and locked; production must persist this server-side and create an audit event.";
+      target.className="notice success";
+      target.setAttribute("role","status");
+    }
+  }));
+}
+initVerificationDemo();
+
 
 /* Home search routes to the correct first-class inventory and carries filters in the URL. */
 const homeSearch = $("[data-home-search]");

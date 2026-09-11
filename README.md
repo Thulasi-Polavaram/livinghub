@@ -124,3 +124,10 @@ Future Android/iOS apps should consume the same backend APIs and business rules.
 ## Authentication identifier policy
 
 The UI supports both verified email address and verified mobile number as account identifiers. Registration collects both. Sign-in and account recovery accept either identifier. For India-first UX, users enter a simple 10-digit mobile number without needing to understand `+91`; production should normalize it server-side to a canonical international representation for SMS/WhatsApp/provider integrations, verify ownership before activation or recovery, apply rate limits/lockouts, avoid account-enumeration responses, and keep authentication secrets out of browser storage.
+
+
+## 2026-09-11 — Theme and resident verification
+- Browser/OS light and dark theme support.
+- Post-signup identity and occupancy verification with owner approval and locked-record prototype.
+- Staff Support removed from the top-level application header and placed in staff workflow content.
+- WCAG-oriented accessible form and status patterns retained.

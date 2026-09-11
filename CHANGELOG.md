@@ -58,3 +58,10 @@
 - Retained canonical international-format values internally for demo matching and future WhatsApp/SMS integration.
 - Reviewed mobile fields across public, authentication and tenant-profile pages for semantic labels, `tel` input, `inputmode` and autocomplete behavior.
 - Added `docs/CHANGE-TRACKER-2026-09-10-MOBILE-FORMAT.md`.
+
+
+## 2026-09-11 — Theme and resident verification
+- Browser/OS light and dark theme support.
+- Post-signup identity and occupancy verification with owner approval and locked-record prototype.
+- Staff Support removed from the top-level application header and placed in staff workflow content.
+- WCAG-oriented accessible form and status patterns retained.
