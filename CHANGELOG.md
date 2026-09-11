@@ -80,3 +80,10 @@
 - Added forced-colors/high-contrast support.
 - Standardized practical 44px primary touch targets.
 - Retained browser/OS `prefers-color-scheme` behavior.
+
+
+## 2026-09-12 — Public shell consistency audit
+- Restored the established public-site header/footer structure in light mode.
+- Scoped public shell styling so accessibility/theme hardening does not alter public navigation hierarchy or spacing.
+- Preserved automatic dark mode with contrast-safe colors.
+- Added `public-shell` class to the home page and all public pages.

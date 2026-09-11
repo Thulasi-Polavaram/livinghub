@@ -216,3 +216,20 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
   .btn,.menu{min-height:44px;min-width:44px}
   .header-actions{gap:10px}
 }
+
+/* Public-site shell stability: keep the established public header/footer structure.
+   Theme changes affect color contrast, not navigation hierarchy or spacing. */
+.public-shell .header{background:rgba(255,255,255,.97)}
+.public-shell .menu{background:#fff;color:#25332e}
+.public-shell .menu span{background:#25332e}
+.public-shell .footer{background:#10201b;color:#eaf3ef}
+.public-shell .footer a{color:#eaf3ef}
+.public-shell .footer small{color:#b8c9c1}
+@media(prefers-color-scheme:dark){
+  .public-shell .header{background:color-mix(in srgb,var(--surface) 96%,transparent)}
+  .public-shell .menu{background:var(--surface);color:var(--ink)}
+  .public-shell .menu span{background:var(--ink)}
+  .public-shell .footer{background:#0b120f;color:#edf5f1}
+  .public-shell .footer a{color:#edf5f1}
+  .public-shell .footer small{color:#c4d1cb}
+}
