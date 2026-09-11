@@ -4,11 +4,11 @@
  --brand:#087f72;--brand-dark:#075b52;--brand-soft:#dff5f0;--line:#d7e2dd;
  --success:#137a4b;--success-bg:#e9f8ef;--warn:#8a5a00;--warn-bg:#fff7dd;
  --danger:#b42318;--danger-bg:#fff0ee;--info:#0757a6;--info-bg:#edf5ff;
- --shadow:0 12px 32px rgba(23,52,44,.08);--radius:16px;--max:1240px;--focus:#005fcc
+ --shadow:0 12px 32px rgba(23,52,44,.08);--radius:16px;--max:1240px;--focus:#005fcc;--brand-cta:#087f72;--brand-cta-hover:#075b52
 }
 html{color-scheme:light dark}
 @media(prefers-color-scheme:dark){
- :root{--bg:#0f1513;--surface:#18211e;--surface-2:#142a25;--ink:#edf5f1;--muted:#b7c5bf;--brand:#39b8a7;--brand-dark:#8de1d4;--brand-soft:#183d36;--line:#35463f;--success:#68d39a;--success-bg:#143c2a;--warn:#f0c36a;--warn-bg:#3a2e12;--danger:#ff8e86;--danger-bg:#3b1917;--info:#83b8ff;--info-bg:#132b45;--shadow:0 12px 32px rgba(0,0,0,.28);--focus:#8fc5ff}
+ :root{--bg:#0f1513;--surface:#18211e;--surface-2:#142a25;--ink:#edf5f1;--muted:#b7c5bf;--brand:#39b8a7;--brand-dark:#8de1d4;--brand-soft:#183d36;--line:#35463f;--success:#68d39a;--success-bg:#143c2a;--warn:#f0c36a;--warn-bg:#3a2e12;--danger:#ff8e86;--danger-bg:#3b1917;--info:#83b8ff;--info-bg:#132b45;--shadow:0 12px 32px rgba(0,0,0,.28);--focus:#8fc5ff;--brand-cta:#137f72;--brand-cta-hover:#075b52;--on-info:#c6dcff;--on-success:#bdf3d2;--on-warn:#ffe2a8;--on-danger:#ffc4bf;--brand-cta-hover:#1e9c8d}
 }
 *{box-sizing:border-box}html{scroll-behavior:smooth}
 body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif}
@@ -24,7 +24,7 @@ img{display:block;max-width:100%}
 .nav{display:flex;gap:16px;align-items:center;margin-left:auto}.nav a{text-decoration:none;font-weight:750;padding:10px 5px}.nav a[aria-current=page]{color:var(--brand)}
 .header-actions{display:flex;gap:8px}.header-clock{display:flex;flex-direction:column;align-items:flex-end;justify-content:center;gap:0;min-width:128px;padding:5px 10px;border-left:1px solid var(--line);font-variant-numeric:tabular-nums;line-height:1.2}.clock-date{font-size:.78rem;font-weight:800;color:var(--ink);white-space:nowrap}.clock-time{font-size:.78rem;color:var(--muted);white-space:nowrap}.menu{display:none;margin-left:auto;background:#fff;border:1px solid var(--line);border-radius:10px;padding:9px}.menu span{display:block;width:22px;height:2px;background:#25332e;margin:4px}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:10px 15px;border:1px solid transparent;border-radius:10px;text-decoration:none;font-weight:800}
-.btn-primary{background:var(--brand);color:#fff}.btn-primary:hover{background:var(--brand-dark)}.btn-secondary{background:var(--surface);border-color:var(--line);color:var(--brand-dark)}
+.btn-primary{background:var(--brand-cta);color:#fff}.btn-primary:hover{background:var(--brand-cta-hover)}.btn-secondary{background:var(--surface);border-color:var(--line);color:var(--brand-dark)}
 .btn-soft{background:var(--brand-soft);color:var(--brand-dark)}.btn-danger{background:var(--danger-bg);color:var(--danger);border-color:#f0c1bc}
 .hero{padding:70px 0 50px;background:linear-gradient(135deg,#e9f8f4,#fff 65%);border-bottom:1px solid var(--line)}
 .hero-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:44px;align-items:center}.eyebrow{margin:0 0 9px;color:var(--brand-dark);font-size:.78rem;font-weight:900;letter-spacing:.14em}
@@ -144,4 +144,75 @@ input,select,textarea{width:100%;min-height:46px;border:1px solid var(--line);ba
  .request-card{background:var(--surface)}
  .mobile-bottom-nav{background:var(--surface)}
  .role-banner{background:var(--surface)}
+ .notice.info{color:var(--on-info)}
+ .notice.success{color:var(--on-success)}
+ .notice.warn{color:var(--on-warn)}
+ .notice.danger{color:var(--on-danger)}
+ .btn-primary:hover{background:var(--brand-cta-hover);color:#fff}
+ .demo-bar{background:#2f2a17;border-bottom-color:#5a4d25;color:#f7e8b5}
+ .demo-bar a{color:#bde7ff}
+ .footer{background:#0b120f;color:#edf5f1}
+ .footer a{color:#edf5f1}
+ .footer small{color:#c4d1cb}
+}
+
+
+/* WCAG 2.2 accessibility hardening: theme-safe contrast, focus, motion and high-contrast mode. */
+:root{color-scheme:light dark}
+
+/* Keep interactive focus clearly visible in both themes and at high zoom. */
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,textarea:focus-visible,[tabindex]:focus-visible{
+  outline:3px solid var(--focus);
+  outline-offset:3px;
+}
+
+/* Status panels use theme tokens rather than fixed dark-mode text colors. */
+.notice.info{color:var(--info)}
+.notice.success{color:var(--success)}
+.notice.warn{color:var(--warn)}
+.notice.danger{color:var(--danger)}
+
+/* Ensure primary CTA hover remains WCAG AA readable in dark mode. */
+@media(prefers-color-scheme:dark){
+  .btn-primary:hover,.btn-primary:focus-visible{background:#075b52;color:#fff}
+  .btn-secondary:hover,.btn-secondary:focus-visible{background:#20302b;color:#8de1d4}
+  .btn-soft{background:#183d36;color:#8de1d4}
+  .btn-danger{background:#3b1917;color:#ffc4bf;border-color:#7b302b}
+  .request-card{background:var(--surface);color:var(--ink)}
+  .property{background:var(--surface);color:var(--ink)}
+  .card,.panel{color:var(--ink)}
+  th{color:var(--ink)}
+}
+
+/* WCAG 2.2 2.5.8: primary pointer targets are at least 44px where practical. */
+.btn,.menu,.header-role{min-height:44px}
+.btn{display:inline-flex;align-items:center;justify-content:center}
+
+/* WCAG 2.2 2.2.2 / user preference: do not force animation or smooth scrolling. */
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{
+    animation-duration:.01ms!important;
+    animation-iteration-count:1!important;
+    transition-duration:.01ms!important;
+    scroll-behavior:auto!important;
+  }
+}
+
+/* Windows High Contrast / forced-colors support. */
+@media(forced-colors:active){
+  *{forced-color-adjust:auto}
+  a,button,input,select,textarea{forced-color-adjust:auto}
+  :focus-visible{outline:3px solid Highlight;outline-offset:3px}
+  .btn-primary,.btn-secondary,.btn-soft,.btn-danger{border:1px solid ButtonText;background:ButtonFace;color:ButtonText}
+  .notice,.card,.panel,.property,.request-card{background:Canvas;color:CanvasText;border:1px solid CanvasText}
+  .badge{background:Canvas;color:CanvasText;border:1px solid CanvasText}
+  .footer{background:Canvas;color:CanvasText;border-top:1px solid CanvasText}
+  .footer a{color:LinkText}
+}
+
+/* Avoid text becoming unreadable when users increase spacing/zoom. */
+@media(max-width:640px){
+  .btn,.menu{min-height:44px;min-width:44px}
+  .header-actions{gap:10px}
 }

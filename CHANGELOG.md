@@ -65,3 +65,18 @@
 - Post-signup identity and occupancy verification with owner approval and locked-record prototype.
 - Staff Support removed from the top-level application header and placed in staff workflow content.
 - WCAG-oriented accessible form and status patterns retained.
+
+## 2026-09-12 — Accessible theme contrast correction
+- Fixed dark-browser theme contrast for status notices and primary CTA states.
+- Added semantic dark-theme status text tokens.
+- Kept automatic `prefers-color-scheme` light/dark behavior.
+- Added release tracker: `docs/CHANGE-TRACKER-2026-09-12-CONTRAST.md`.
+
+## 2026-09-12 — WCAG 2.2 accessibility hardening
+- Hardened light/dark theme contrast using semantic color tokens.
+- Corrected dark-theme CTA hover/focus contrast.
+- Added stronger focus-visible treatment across interactive controls.
+- Added reduced-motion support.
+- Added forced-colors/high-contrast support.
+- Standardized practical 44px primary touch targets.
+- Retained browser/OS `prefers-color-scheme` behavior.
