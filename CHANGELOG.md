@@ -130,3 +130,15 @@
 - Preserved first-class Apartment and PG/Co-living inventory.
 - Hardened inventory sorting, URL state, distance sorting and mobile/email form semantics.
 - Added feature preservation and accessibility audit documentation.
+
+## 2026-09-12 — Public resident verification
+- Added public resident verification form and submission-success page.
+- Signup continuation now opens the public verification flow; existing authenticated tenant verification page remains unchanged.
+- Added apartment-only resident evidence behavior and accessibility/security documentation.
+
+## 2026-09-12 — Maintenance staff verification routing
+- Signup Primary use now routes Find an apartment and Find a PG / Co-living to the existing public resident verification flow.
+- Added a separate public maintenance staff verification form for the Maintenance work Primary use.
+- Added a separate staff verification submission-success page with the 12-hour review message.
+- List / manage property does not redirect to either verification flow.
+- Existing authenticated tenant verification code/page remains unchanged.

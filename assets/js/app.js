@@ -151,18 +151,93 @@ $$("[data-demo-form]").forEach(form=>form.addEventListener("submit",event=>{
   }
 }));
 
-/* Demo onboarding: signup leads to resident identity/occupancy verification.
+/* Demo onboarding: route verification by the selected primary use.
    Sensitive files are never persisted in browser storage; production must use
    encrypted server-side storage, strict RBAC, retention rules and audit logs. */
-const signupForm = $("[data-demo-signup]");
+const signupForm = $(`[data-demo-signup]`);
 if(signupForm){
   signupForm.addEventListener("submit", event=>{
     event.preventDefault();
-    const msg = $("[data-form-message]",signupForm);
+    const msg = $(`[data-form-message]`,signupForm);
+    const primaryUse = $("#role", signupForm)?.value || "";
+    let target = "";
+    let label = "Continue to identity & occupancy verification";
+    if(primaryUse === "find-apartment" || primaryUse === "find-pg"){
+      target = "../../pages/public/tenant-verification.html";
+    } else if(primaryUse === "maintenance"){
+      target = "../../pages/public/staff-verification.html";
+      label = "Continue to maintenance staff verification";
+    }
     if(msg){
-      msg.innerHTML = 'Account created in demo mode. <a class="btn btn-soft" href="../../pages/tenant/verification.html">Continue to identity & occupancy verification</a>';
+      if(target){
+        msg.innerHTML = `Account created in demo mode. <a class="btn btn-soft" href="${target}">${label}</a>`;
+      } else {
+        msg.textContent = "Account created in demo mode. Your property-management onboarding can continue from the account dashboard.";
+      }
       msg.className = "notice success"; msg.setAttribute("role","status");
     }
+  });
+}
+
+/* Public maintenance staff verification demo. Sensitive files are never persisted in browser storage. */
+const staffVerificationForm = $(`[data-staff-verification-form]`);
+if(staffVerificationForm){
+  const emergency = $("#sv-emergency", staffVerificationForm);
+  const message = $(`[data-staff-verification-message]`, staffVerificationForm);
+  staffVerificationForm.addEventListener("submit", event=>{
+    event.preventDefault();
+    message.className = "";
+    if(!staffVerificationForm.checkValidity()){
+      staffVerificationForm.reportValidity();
+      return;
+    }
+    const digits = String(emergency?.value || "").replace(/\D/g, "");
+    if(!/^[6-9]\d{9}$/.test(digits)){
+      emergency?.setCustomValidity("Enter a valid 10-digit Indian mobile number.");
+      emergency?.reportValidity();
+      emergency?.setCustomValidity("");
+      return;
+    }
+    window.location.href = "staff-verification-success.html";
+  });
+}
+
+/* Public resident verification demo. Sensitive files are never persisted in browser storage. */
+const residentVerificationForm = $("[data-resident-verification-form]");
+if(residentVerificationForm){
+  const occupancy = $("#rv-occupancy", residentVerificationForm);
+  const evidenceSection = $("#resident-evidence-section", residentVerificationForm);
+  const evidenceInputs = $$('input[name="evidenceType"]', residentVerificationForm);
+  const evidenceFile = $("#rv-evidence-file", residentVerificationForm);
+  const emergency = $("#rv-emergency", residentVerificationForm);
+  const message = $("[data-resident-verification-message]", residentVerificationForm);
+
+  function updateEvidence(){
+    const isApartment = occupancy?.value === "apartment-individual" || occupancy?.value === "apartment-group";
+    if(evidenceSection) evidenceSection.hidden = !isApartment;
+    evidenceInputs.forEach(input => { input.required = isApartment; input.disabled = !isApartment; });
+    if(evidenceFile){ evidenceFile.required = isApartment; evidenceFile.disabled = !isApartment; }
+    if(!isApartment){ evidenceInputs.forEach(input=>input.checked=false); if(evidenceFile) evidenceFile.value=""; }
+  }
+  occupancy?.addEventListener("change", updateEvidence);
+  updateEvidence();
+
+  residentVerificationForm.addEventListener("submit", event=>{
+    event.preventDefault();
+    message.className = "";
+    if(!residentVerificationForm.checkValidity()){
+      residentVerificationForm.reportValidity();
+      return;
+    }
+    const digits = String(emergency?.value || "").replace(/\D/g, "");
+    if(!/^[6-9]\d{9}$/.test(digits)){
+      emergency?.setCustomValidity("Enter a valid 10-digit Indian mobile number.");
+      emergency?.reportValidity();
+      emergency?.setCustomValidity("");
+      return;
+    }
+    sessionStorage.setItem("ulp_demo_verification_submitted", "true");
+    window.location.href = "tenant-verification-success.html";
   });
 }
 

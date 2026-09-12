@@ -252,3 +252,10 @@ a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,te
 @media(max-width:640px){
   .auth-primary-action .btn,.auth-switch .btn{width:100%;min-width:0}
 }
+
+/* Public resident verification form */
+.upload-choice{border:1px solid var(--line);border-radius:12px;padding:16px;background:var(--surface)}
+.upload-choice legend{font-weight:800;padding:0 6px}
+.upload-choice .check{display:flex;align-items:flex-start;gap:9px}
+.upload-choice input[type="radio"]{margin-top:3px}
+@media (max-width:640px){.upload-choice{padding:14px}.upload-choice .field{margin-top:12px}}
