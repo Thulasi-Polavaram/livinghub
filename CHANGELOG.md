@@ -1,3 +1,14 @@
+## 2026-09-12 — Signup PG/Apartment UX
+- Made Apartment and PG / Co-living choices explicit in Primary use.
+- Added accessible helper text and required semantics.
+- Centered Create account and added an “Already have an account?” prompt before Sign in.
+
+## 2026-09-12 — Authentication/Public Footer Corrections
+- Removed redundant help card from authentication support.
+- Kept authentication legal/support links within the auth context.
+- Removed Tenant application links from public-page footers.
+- Standardized auth-page brand navigation back to Sign in.
+
 
 ## 2026-09-10 — Mobile login normalization fix
 - Fixed demo authentication to accept both 10-digit Indian mobile numbers and `+91` international-format numbers.
@@ -87,3 +98,35 @@
 - Scoped public shell styling so accessibility/theme hardening does not alter public navigation hierarchy or spacing.
 - Preserved automatic dark mode with contrast-safe colors.
 - Added `public-shell` class to the home page and all public pages.
+
+
+## 2026-09-12 — Authentication/Public shell navigation correction
+- Rebuilt all authentication headers as a minimal auth shell with no public navigation or duplicate CTAs.
+- Kept authentication footer links inside `pages/auth/` only.
+- Removed Tenant footer section from the public home page.
+- Preserved public Support in the public site shell and role-specific support inside authenticated workspaces.
+
+## 2026-09-12 — Public/Auth Shell and Legal Link Separation
+- Sign In and Sign Up now use the public header/footer structure with header Sign in/Get started actions removed.
+- Removed Registration privacy and Registration terms from all footers.
+- Authentication Privacy/Terms links stay in `pages/auth/`; public Privacy/Terms stay in `pages/public/`.
+- Authentication Support stays in `pages/auth/support.html`.
+
+## 2026-09-12 — Public/Auth Shell Alignment v2
+- Aligned Sign In and Sign Up header/footer structure with Index while removing only the redundant header CTAs.
+- Removed Registration Privacy/Terms from all footer link groups.
+- Kept registration notices available from the signup consent text.
+- Kept public and authentication Privacy/Terms destinations separate.
+
+- Fixed public Support routing from Sign In/Sign Up and separated Sign In Privacy/Terms pages.
+
+## 2026-09-12 — Role legal links and authentication cross-links
+- Added role-specific authenticated Privacy/Terms pages.
+- Added Login ↔ Signup cross-links.
+- Prevented authenticated footer legal links from redirecting to public legal pages.
+
+
+## 2026-09-12 — Feature preservation and filter hardening
+- Preserved first-class Apartment and PG/Co-living inventory.
+- Hardened inventory sorting, URL state, distance sorting and mobile/email form semantics.
+- Added feature preservation and accessibility audit documentation.

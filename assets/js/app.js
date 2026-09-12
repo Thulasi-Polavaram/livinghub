@@ -224,33 +224,43 @@ function initInventoryFilters(){
   if(!panel || !list) return;
   const page = panel.dataset.filterPanel;
   const items = $$("[data-search-item]",list);
+  const originalOrder = [...items];
   const search = $("[data-filter-search]",panel);
-  const selects = $$(`[data-filter-select]`,panel);
+  const selects = $$("[data-filter-select]",panel);
   const sort = $("[data-filter-sort]");
   const count = $("[data-results-count]");
   const status = $("[data-filter-status]");
   const empty = $("[data-filter-empty]");
   const params = new URLSearchParams(location.search);
+
   if(search) search.value = params.get("where") || params.get("q") || "";
   selects.forEach(select=>{
     const value = params.get(select.dataset.filterSelect);
     if(value) select.value = value;
   });
+
   if(params.get("budget")){
     const budgetSelect = $("[data-filter-select='budget']",panel);
     if(budgetSelect){
       const raw = params.get("budget");
-      const aliases = page === "apartments" ? {under10:"under20", "10to20":"20to30", "20to30":"20to30", over30:"over30"} : {under10:"under10", "10to20":"10to15", "20to30":"over15", over30:"over15"};
-      budgetSelect.value = ["under20","20to30","over30","under10","10to15","over15"].includes(raw) ? raw : (aliases[raw] || parseBudgetRange(raw,page));
+      const aliases = page === "apartments"
+        ? {under10:"under20", "10to20":"20to30", "20to30":"20to30", over30:"over30"}
+        : {under10:"under10", "10to20":"10to15", "20to30":"over15", over30:"over15"};
+      const normalized = ["under20","20to30","over30","under10","10to15","over15"].includes(raw)
+        ? raw : (aliases[raw] || parseBudgetRange(raw,page));
+      if(normalized) budgetSelect.value = normalized;
     }
   }
+  if(sort && params.get("sort")) sort.value = params.get("sort");
 
   function values(){
     return Object.fromEntries(selects.map(s=>[s.dataset.filterSelect,s.value]));
   }
+
   function matches(item, v, query){
     const text = item.textContent.toLowerCase();
     if(query && !text.includes(query)) return false;
+
     if(page === "apartments"){
       if(v.bhk && v.bhk !== "any" && item.dataset.bhk !== v.bhk) return false;
       if(v.furnishing && v.furnishing !== "any" && item.dataset.furnishing !== v.furnishing) return false;
@@ -263,35 +273,54 @@ function initInventoryFilters(){
     }
     return true;
   }
+
   function updateURL(v,query){
     const p = new URLSearchParams();
     if(query) p.set("where",query);
     Object.entries(v).forEach(([k,val])=>{ if(val && val !== "any") p.set(k,val); });
+    if(sort && sort.value && sort.value !== "recommended") p.set("sort",sort.value);
     if(page === "pg" && params.get("kind")) p.set("kind",params.get("kind"));
     history.replaceState(null,"",`${location.pathname}${p.toString()?"?"+p.toString():""}${location.hash}`);
   }
+
   function apply(){
     const v = values();
     const query = (search?.value || "").trim().toLowerCase();
     const visible = items.filter(item=>matches(item,v,query));
-    if(sort?.value === "price-asc") items.sort((a,b)=>Number(a.dataset.budget)-Number(b.dataset.budget)).forEach(i=>list.appendChild(i));
-    if(sort?.value === "newest") items.sort((a,b)=>Number(b.dataset.newest||0)-Number(a.dataset.newest||0)).forEach(i=>list.appendChild(i));
-    if(sort?.value === "distance") items.sort((a,b)=>Number(a.dataset.distance||999)-Number(b.dataset.distance||999)).forEach(i=>list.appendChild(i));
+    const ordered = [...originalOrder];
+
+    if(sort?.value === "price-asc"){
+      ordered.sort((a,b)=>Number(a.dataset.budget)-Number(b.dataset.budget));
+    } else if(sort?.value === "newest"){
+      ordered.sort((a,b)=>Number(b.dataset.newest||0)-Number(a.dataset.newest||0));
+    } else if(sort?.value === "distance"){
+      ordered.sort((a,b)=>Number(a.dataset.distance||999)-Number(b.dataset.distance||999));
+    }
+
+    ordered.forEach(item=>list.appendChild(item));
     items.forEach(item=>item.hidden=!visible.includes(item));
+
     const total = visible.length;
     if(count) count.textContent = `${total} ${page === "pg" ? "PG / co-living options" : "apartment homes"}`;
-    if(status) status.textContent = total === items.length ? `Showing all ${page === "pg" ? "PG / co-living options" : "apartment homes"}.` : `${total} matching result${total===1?"":"s"}.`;
+    if(status) status.textContent = total === items.length
+      ? `Showing all ${page === "pg" ? "PG / co-living options" : "apartment homes"}.`
+      : `${total} matching result${total===1?"":"s"}.`;
     if(empty) empty.hidden = total !== 0;
     updateURL(v,query);
   }
-  [search,...selects,sort].filter(Boolean).forEach(el=>el.addEventListener(el.tagName === "INPUT" ? "input" : "change",apply));
-  $("[data-filter-clear]")?.addEventListener("click",()=>{
+
+  [search,...selects,sort].filter(Boolean).forEach(el=>{
+    el.addEventListener(el.tagName === "INPUT" ? "input" : "change",apply);
+  });
+
+  $("[data-filter-clear]",panel)?.addEventListener("click",()=>{
     if(search) search.value="";
     selects.forEach(s=>s.value="any");
     if(sort) sort.value="recommended";
     apply();
     search?.focus();
   });
+
   apply();
 }
 initInventoryFilters();
